@@ -1,16 +1,21 @@
 <script>
     import marked from 'marked'
-
+    
     export let text;
     export let dateTime;
+    export let index;
 </script>
 
 <style>
     li {
         list-style: none;
-        padding: 10px;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
         border: 1px solid #ddd;
-        margin: 10px;
+        margin: 0 10px;
         max-width: 300px;
         border-radius: 4px;
     }

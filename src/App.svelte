@@ -5,12 +5,16 @@
 
     let text = '';
     let notes = [];
+    
+    let localNotes = localStorage.getItem('notes');
+    if(localNotes) { notes = [...JSON.parse(localNotes)]; }
 
     function saveNote() {
         notes = [...notes, {
             text,
             dateTime: new Date().toUTCString()
         }];
+        localStorage.setItem('notes', JSON.stringify(notes))
         text = '';
     }
 </script>
@@ -51,8 +55,8 @@
 
 <h1>{name}!</h1>
 <ul class="preview">
-{#each notes as note}
-<NoteItem {...note}/>
+{#each notes as note, i}
+<NoteItem {...note} index={i}/>
 {/each}
 </ul>
 <form class="container">
