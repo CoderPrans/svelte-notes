@@ -1,9 +1,16 @@
 <script>
     import marked from 'marked'
-    
+    import { createEventDispatcher } from 'svelte'
+
+    let dispatch = createEventDispatcher();
+
+    function delEvent(i) {
+        dispatch("deletenote", { i })
+    } 
+
     export let text;
     export let dateTime;
-    export let index;
+    export let i;
 </script>
 
 <style>
@@ -24,4 +31,5 @@
 <li>
     <p>{@html marked(text)}</p>
     <pre>{dateTime}</pre>
+    <button on:click={() => delEvent(i)}>del {i}</button>
 </li>

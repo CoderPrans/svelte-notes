@@ -17,6 +17,17 @@
         localStorage.setItem('notes', JSON.stringify(notes))
         text = '';
     }
+
+    function deleteNote(e) {
+        let i = e.detail.i
+        alert(`event triggered for index: ${i}`)
+        notes = [...notes.slice(0, i), ...notes.slice(i+1)]
+    }
+
+    function clearNotes() {
+        notes = [];
+        localStorage.setItem('notes', '');
+    }
 </script>
 
 <style>
@@ -56,11 +67,12 @@
 <h1>{name}!</h1>
 <ul class="preview">
 {#each notes as note, i}
-<NoteItem {...note} index={i}/>
+<NoteItem {...note} i={i} on:deletenote={deleteNote}/>
 {/each}
 </ul>
 <form class="container">
 <textarea placeholder="Take a note..." bind:value={text}/>
 <button type="submit" on:click|preventDefault={saveNote}>Save</button>
 </form>
+<button on:click={clearNotes}>Clear Notes</button>
 <Footer />
