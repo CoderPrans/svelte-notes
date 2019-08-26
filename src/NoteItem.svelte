@@ -26,10 +26,23 @@
         max-width: 300px;
         border-radius: 4px;
     }
+    .delete-icon {
+        font-size: 20px;
+        cursor: pointer;
+        margin: 0;
+    }
+    .note-info {
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        width: 100%;
+    }
 </style>
 
 <li>
     <p>{@html marked(text)}</p>
+    <div class="note-info">
     <pre>{dateTime}</pre>
-    <button on:click={() => delEvent(i)}>del {i}</button>
+    <p class="delete-icon" on:click={() => delEvent(i)}>🗑️</p>
+    </div>
 </li>

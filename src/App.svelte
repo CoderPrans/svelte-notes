@@ -14,14 +14,14 @@
             text,
             dateTime: new Date().toUTCString()
         }];
-        localStorage.setItem('notes', JSON.stringify(notes))
+        localStorage.setItem('notes', JSON.stringify(notes));
         text = '';
     }
 
     function deleteNote(e) {
         let i = e.detail.i
-        alert(`event triggered for index: ${i}`)
         notes = [...notes.slice(0, i), ...notes.slice(i+1)]
+        localStorage.setItem('notes', JSON.stringify(notes));
     }
 
     function clearNotes() {
@@ -31,6 +31,10 @@
 </script>
 
 <style>
+    a {
+        color: #666;
+        text-decoration: underline;
+    }
 	h1 {
 		color: purple;
         text-align: center;
@@ -65,6 +69,7 @@
 </style>
 
 <h1>{name}!</h1>
+<a on:click={clearNotes}>Clear Notes</a>
 <ul class="preview">
 {#each notes as note, i}
 <NoteItem {...note} i={i} on:deletenote={deleteNote}/>
@@ -74,5 +79,4 @@
 <textarea placeholder="Take a note..." bind:value={text}/>
 <button type="submit" on:click|preventDefault={saveNote}>Save</button>
 </form>
-<button on:click={clearNotes}>Clear Notes</button>
 <Footer />
